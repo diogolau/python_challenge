@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tracked Stocks</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'configure_style.css'%}">
+</head>
+<body>
+    <h1>Tracked Stocks</h1>
+    <table>
+        <tr>
+            <th>Stock</th>
+            <th>Upper Limit Price</th>
+            <th>Lower Limit Price</th>
+            <th>Time Period</th>
+            <th>Status</th>
+            <th>Enable/Disable</th>
+            <th>Show Records</th>
+            <th>Change Properties</th>
+            <th>Delete Stock</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock.ticker }}</td>
+            <td>{{ stock.sell_value }}</td>
+            <td>{{ stock.buy_value }}</td>
+            <td>{{ stock.time_period }}</td>
+            <td>{% if not stock.tracked %}Not{% endif %} Tracking</td>
+            <td>
+                <form method="post" action="{% url 'disable_enable_tracking' %}">
+                    {% csrf_token %}
+                    <button class="track-button" type="submit" name="track_button" value="{{ stock.ticker }}">Toggle</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" action="{% url 'show_stock_records' %}">
+                    {% csrf_token %}
+                    <button class="change-button" type="submit" name="records_button" value="{{ stock.ticker }}">X</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" action="{% url 'change_stock_properties' %}">
+                    {% csrf_token %}
+                    <button class="change-button" type="submit" name="change_button" value="{{ stock.ticker }}">X</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" action="{% url 'delete_stock' %}">
+                    {% csrf_token %}
+                    <button class="delete-button" type="submit" name="delete_button" value="{{ stock.ticker }}">X</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="9">No stocks being tracked.</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div>
+        <h4 class="go-back-link"><a id="go-back-link" href="/">Go Back</h4>
+    </div>
+</body>
+</html>

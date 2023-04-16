@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Stock Monitor</title>
+    {% load static %}
+    <link  rel="stylesheet" href="{% static 'home_style.css' %}">
+</head>
+<body style="text-align: center;">
+    <h1>Stock Monitor</h1>
+    <div id="stock_adder">
+        <form method="post" class="container">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="start_monitoring" value="start">Submit</button>
+        </form>
+    </div>
+    <div>
+        <h4 class="config-link"><a id="link-anchor" href="configurations/">Config</h4>
+    </div>
+</body>
+</html>

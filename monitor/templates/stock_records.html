@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tracked Stocks</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'configure_style.css'%}">
+</head>
+<body>
+  <h1>Tracked Stocks</h1>
+    <table>
+        <tr>
+            <th>Stock</th>
+            <th>Upper Limit Price</th>
+            <th>Lower Limit Price</th>
+            <th>Price at the moment</th>
+            <th>Action</th>
+        </tr>
+        {% for record in records %}
+            <tr>
+                <td>{{ record.ticker }}</td>
+                <td>{{ record.sell_value }}</td>
+                <td>{{ record.buy_value }}</td>
+                <td style="color: #333;">{{ record.current_price }}</td>
+                {% if record.action == "Sell"%}
+                    <td style="color: red;">  
+                        {{ record.action }}
+                    </td>
+                {% elif record.action == "Buy" %}
+                    <td style="color: green;">  
+                        {{ record.action }}
+                    </td>
+                {% else %}
+                    <td style="color: #333;">  
+                        {{ record.action }}
+                    </td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">No records for this stock.</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div>
+        <h4 class="go-back-link"><a id="go-back-link" href="{% url 'configure_stock' %}">Go Back</h4>
+    </div>
+</body>
+</html>

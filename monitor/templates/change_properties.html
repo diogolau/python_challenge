@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Stock Config</title>
+    {% load static %}
+    <link  rel="stylesheet" href="{% static 'home_style.css' %}">
+</head>
+<body style="text-align: center;">
+    <h1>Properties Changer</h1>
+    <div id="stock_adder">
+        <form method="post" class="container">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="change_stock_properties" value="{{ stock_ticker }}">Change</button>
+        </form>
+    </div>
+    <div>
+        <h4 class="go-back-link"><a id="go-back-link" href="{% url 'configure_stock' %}">Go Back</h4>
+    </div>
+</body>
+</html>
