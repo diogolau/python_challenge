@@ -38,13 +38,13 @@ SENDER_PASSWORD = #the password#
 ```bash
 pip install pipenv
 ```
-Now, install all the dependecies running: 
+&nbsp;&nbsp;&nbsp;&nbsp;Now, install all the dependecies running: 
 
 ```bash
 pipenv install
 ```
 
-That should install all of the packages inside Pipfile.
+&nbsp;&nbsp;&nbsp;&nbsp;That should install all of the packages inside Pipfile.
 
 &nbsp;&nbsp;&nbsp;&nbsp;At this point, you should have all of the required packages installed, just needing to start the Django application. But first, we will activate Celery and Celery Beat. To do that, open 3 Git Bashes (I'm running it at Visual Studio Code), I don't recommend using Powershell due to security configurations that Windows may have and can cause some errors. 
 
@@ -71,7 +71,9 @@ celery -A stockmonitor.celery beat -l info
 
 &nbsp;&nbsp;&nbsp;&nbsp;Here, you may have to execute several commands, depending on your requirements. You can use this command to see what you can do:
 
+```bash
 python manage.py
+```
 
 &nbsp;&nbsp;&nbsp;&nbsp;However, you may only need to run these three commands, in the respective order:
 ```bash
